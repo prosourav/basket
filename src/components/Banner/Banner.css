@@ -1,0 +1,18 @@
+.items{
+   width: 50%;
+   border: 2px solid black;
+   margin-right: 5%;
+}
+.cart{
+   width: 50%;
+   border: 2px solid black;
+   
+}
+.secondSection{
+   padding: 5% 16%;
+   display: flex;
+}
+.item{
+   background-color: lightgray;
+   height: 40px;
+}
