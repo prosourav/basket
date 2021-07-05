@@ -7,23 +7,35 @@ const Banner = () => {
  const  products = ['Strawberry','Blueberry','Orange','Banana','Apple','Carrot','Celery','Mushroom','Green Pepper','Eggs','Cheese',
  'Butter','Chicken','Bread','Pork','Rice','Pasta'];
    const [cart,setCart] = useState([]);
-  
-  
+   const [cut,setCut] = useState(false);
 
+   // const remove=(prd)=>{
+   //    console.log('delete button working');
+   //    console.log(prd);
+   //  const newCart = cart.filter(products=>products.Name !==prd.Name);
+   //  setCart(newCart);
+   // }
+  
 
    const addToCart=(prd)=>{
       
       console.log(prd);
-     const exist =  cart.find(product=> product.Name===prd && ++product.Num)
-     if(!exist){
+     const exist =  cart.find(product=> product.Name===prd);
+
+     if(exist){
+       exist.Num++;
+       const newcart = [...cart];
+       setCart(newcart);
+      // setCart(newCart);
+   }
+     else if(!exist){
       const cartItem={
          Name:prd,
          Num:1
       }
       const newCart = [...cart,cartItem]
       setCart(newCart);
-      console.log({cart});
-     }
+     } 
    
    }
    return (
@@ -45,7 +57,7 @@ const Banner = () => {
          <FontAwesomeIcon icon={faTrash} size = '2x'/>
          </div>
           
-         {cart.map(prd=> <div className='item'><h3><FontAwesomeIcon icon={faMinusSquare} color='grey'/> {prd.Num}{prd.Name} </h3></div>)}
+         {cart.map(prd=> <div className='item'><h3 style={{ color:cut && 'red'}}><FontAwesomeIcon onClick={()=>setCut(!cut)} icon={faMinusSquare} color='grey'/> {prd.Num}{prd.Name} </h3></div>)}
          </div>
          </div>
       </div>
