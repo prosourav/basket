@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { faShoppingBasket, faPlusSquare, faLeaf, faMinusSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './Banner.css';
+import Item from '../Item/Item';
 
 const Banner = () => {
  const  products = ['Strawberry','Blueberry','Orange','Banana','Apple','Carrot','Celery','Mushroom','Green Pepper','Eggs','Cheese',
  'Butter','Chicken','Bread','Pork','Rice','Pasta'];
    const [cart,setCart] = useState([]);
-   const [cut,setCut] = useState(false);
+   const [count,setCount] = useState(0);
 
-   // const remove=(prd)=>{
-   //    console.log('delete button working');
-   //    console.log(prd);
-   //  const newCart = cart.filter(products=>products.Name !==prd.Name);
-   //  setCart(newCart);
-   // }
-  
+   
+
 
    const addToCart=(prd)=>{
       
@@ -26,7 +22,7 @@ const Banner = () => {
        exist.Num++;
        const newcart = [...cart];
        setCart(newcart);
-      // setCart(newCart);
+      // setCart(newcart);
    }
      else if(!exist){
       const cartItem={
@@ -37,6 +33,10 @@ const Banner = () => {
       setCart(newCart);
      } 
    
+   }
+   const del=(x)=>{
+      console.log({x});
+      
    }
    return (
       <div>
@@ -57,8 +57,11 @@ const Banner = () => {
          <FontAwesomeIcon icon={faTrash} size = '2x'/>
          </div>
           
-         {cart.map(prd=> <div className='item'><h3 style={{ color:cut && 'red'}}><FontAwesomeIcon onClick={()=>setCut(!cut)} icon={faMinusSquare} color='grey'/> {prd.Num}{prd.Name} </h3></div>)}
+         {cart.map((prd,index)=> <Item  prd={prd} index={index} key={index} del={del()}></Item>)}
          </div>
+         
+         <button onClick={()=>setCount(count+1)}>increase</button>
+         <h1>{count}</h1>
          </div>
       </div>
    );
